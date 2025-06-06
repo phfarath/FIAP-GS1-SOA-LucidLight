@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Ajustado para br.com.fiap conforme solicitado -->
+    <groupId>br.com.fiap</groupId>
+    <artifactId>lucidlight-api-client</artifactId> <!-- Mantendo o nome do artefato -->
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>LucidLight API Client</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source> <!-- Atualizado para Java 21 -->
+        <maven.compiler.target>21</maven.compiler.target> <!-- Atualizado para Java 21 -->
+        <jakarta.xml.ws.version>4.0.2</jakarta.xml.ws.version> <!-- Versão recente JAX-WS API -->
+        <jaxws.rt.version>4.0.3</jaxws.rt.version> <!-- Versão recente JAX-WS Runtime (Metro) -->
+        <jackson.version>2.17.1</jackson.version> <!-- Versão recente Jackson -->
+        <junit.jupiter.version>5.10.2</junit.jupiter.version> <!-- Versão recente JUnit 5 -->
+    </properties>
+
+    <dependencies>
+        <!-- Java 11+ HTTP Client is built-in -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+
+        <!-- Jackson for JSON Processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- JAX-WS for SOAP -->
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>${jakarta.xml.ws.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>${jaxws.rt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- JUnit 5 for testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version> <!-- Versão recente -->
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version> <!-- Versão recente -->
+            </plugin>
+
+            <!-- Plugin para gerar código a partir de WSDL (exemplo, descomentar e configurar se tiver WSDL) -->
+            <!--
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>4.0.1</version> 
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <packageName>br.com.fiap.client.soap.generated</packageName> 
+                    <sourceDestDir>${project.build.sourceDirectory}</sourceDestDir>
+                    <wsdlUrls>
+                        <wsdlUrl>http://exemplo.com/servico-legado?wsdl</wsdlUrl> 
+                    </wsdlUrls>
+                    <keep>true</keep>
+                    <extension>true</extension> 
+                </configuration>
+            </plugin>
+            -->
+        </plugins>
+    </build>
+</project>
+
